@@ -1,0 +1,54 @@
+// app/globals.css
+.jal-header {
+  font-family: var(--font-jal-latin), var(--font-jal-jp), "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, system-ui, -apple-system, "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  letter-spacing: 0.01em; /* adjust to match screenshot precisely */
+}
+
+// components/site-header.tsx
+import React from "react";
+
+const SiteHeader: React.FC = () => {
+  return (
+    <header className="sticky top-0 z-50 w-full bg-black text-white jal-header">
+      <img src="/brand/jal-roundel.svg" alt="JAL Roundel" />
+      <img src="/brand/jal-wordmark.svg" alt="JAL Wordmark" />
+      <img src="/brand/oneworld.svg" alt="OneWorld Badge" />
+      {/* rest of code here */}
+    </header>
+  );
+};
+
+export default SiteHeader;
+
+// app/layout.tsx
+import React from 'react';
+import localFont from "next/font/local"
+import "./globals.css"
+
+const jalLatin = localFont({
+  src: [
+    { path: "/fonts/jal-latin-regular.woff2", weight: "400", style: "normal" },
+    { path: "/fonts/jal-latin-medium.woff2",  weight: "500", style: "normal" },
+    { path: "/fonts/jal-latin-bold.woff2",    weight: "700", style: "normal" },
+  ],
+  variable: "--font-jal-latin",
+  display: "swap",
+})
+
+const jalJP = localFont({
+  src: [
+    { path: "/fonts/jal-jp-regular.woff2", weight: "400", style: "normal" },
+    { path: "/fonts/jal-jp-medium.woff2",  weight: "500", style: "normal" },
+    { path: "/fonts/jal-jp-bold.woff2",    weight: "700", style: "normal" },
+  ],
+  variable: "--font-jal-jp",
+  display: "swap",
+})
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${jalLatin.variable} ${jalJP.variable}`}>
+      <body>{children}</body>
+    </html>
+  )
+}
